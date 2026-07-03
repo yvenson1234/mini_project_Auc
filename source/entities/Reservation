@@ -18,6 +18,7 @@ class Reservation :
         self.status = "ACTIVE"
 
 
+
         def cancel_reservation(self):
             if self.status == "ACTIVE":
                 self.status = "CANCELED"
