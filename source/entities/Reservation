@@ -1,0 +1,33 @@
+from dataclasses import dataclass, field
+from enum import Enum
+
+
+
+class Reservation : 
+    reservationId : int
+    bookId : int
+    reservationDate : str
+    expirateDate : str
+    status : str = field(default="ACTIVE")
+
+    def create_reservation(self, reservationId:int, bookId:int, reservationDate:str, expirateDate:str):
+        self.reservationId = reservationId
+        self.bookId = bookId
+        self.reservationDate = reservationDate
+        self.expirateDate = expirateDate
+        self.status = "ACTIVE"
+
+
+        def cancel_reservation(self):
+            if self.status == "ACTIVE":
+                self.status = "CANCELED"
+            else:
+                raise ValueError(
+                    f"Cannot cancel a reservation who is {self.status}"
+                )
+
+
+                def check_reservation_status(self) -> str:
+                    return self.status
+
+                    
