@@ -52,5 +52,10 @@ class Book:
                 f"Cannot borrow a book who is {self.status}"
             )
 
-    def returnBook(self):
-        self.status = "AVAILABLE"
+    def return_book(self):
+        if self.status == "BORROWED":
+            self.status = "AVAILABLE"
+        else:
+            raise ValueError(
+                f"Cannot return a book who is {self.status}"
+            )

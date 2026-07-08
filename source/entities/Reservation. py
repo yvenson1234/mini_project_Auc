@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from enum import Enum
-
+from soure.entities import Book
 
 
 class Reservation : 
     reservationId : int
-    bookId : int
+    user  : user
+    book : Book
     reservationDate : str
     expirateDate : str
     status : str = field(default="ACTIVE")
@@ -30,5 +31,6 @@ class Reservation :
 
                 def check_reservation_status(self) -> str:
                     return self.status
+
 
                     
