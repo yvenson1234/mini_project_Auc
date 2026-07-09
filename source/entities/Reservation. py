@@ -1,36 +1,23 @@
 from dataclasses import dataclass, field
-from enum import Enum
-from soure.entities import Book
-
-
-class Reservation : 
-    reservationId : int
-    user  : user
-    book : Book
-    reservationDate : str
-    expirateDate : str
-    status : str = field(default="ACTIVE")
-
-    def create_reservation(self, reservationId:int, bookId:int, reservationDate:str, expirateDate:str):
-        self.reservationId = reservationId
-        self.bookId = bookId
-        self.reservationDate = reservationDate
-        self.expirateDate = expirateDate
-        self.status = "ACTIVE"
+from .book import Book
 
 
 
-        def cancel_reservation(self):
-            if self.status == "ACTIVE":
-                self.status = "CANCELED"
-            else:
-                raise ValueError(
-                    f"Cannot cancel a reservation who is {self.status}"
-                )
+@dataclass
+class Reservation:
+    reservation_id: int
+    book_name : str
+    user_id: int
+    status: str = field(default="ACTIVE")
 
 
-                def check_reservation_status(self) -> str:
-                    return self.status
+    def cancel_reservation(self):
+        if self.status == "ACTIVE":
+            self.status = "CANCELED"
+        else:
+            raise ValueError(
+                f"Cannot cancel a reservation that is {self.status}."
+            )
 
-
-                    
+    def check_reservation_status(self) -> str:
+        return self.status

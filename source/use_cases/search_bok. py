@@ -1,0 +1,11 @@
+from interfaces.book_repository import BookRepository
+
+
+
+class SearchBookUseCase:
+
+    def __init__(self, book_repository):
+        self.book_repository = book_repository
+
+    def execute(self, title: str):
+        return self.book_repository.search_by_title(title)

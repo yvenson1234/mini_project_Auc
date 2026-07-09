@@ -17,6 +17,14 @@ class Category(Enum) :
     ENVIRONMENTAL_SCIENCES = "ENVIRONMENTAL_SCIENCES"
 
 
+
+class BookStatus(Enum):
+    AVAILABLE = "AVAILABLE"
+    RESERVED = "RESERVED"
+   
+
+
+
 @dataclass
 class Book:
     id : int
@@ -44,16 +52,9 @@ class Book:
                 f"Cannot reserve a book who is {self.status}"
             )
 
-    def borrow(self):
-        if self.is_avalaible():
-            self.status = "BORROWED"
-        else:
-            raise ValueError(
-                f"Cannot borrow a book who is {self.status}"
-            )
 
     def return_book(self):
-        if self.status == "BORROWED":
+        if self.status == "RESERVED":   
             self.status = "AVAILABLE"
         else:
             raise ValueError(
