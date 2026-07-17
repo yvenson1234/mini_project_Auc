@@ -1,23 +1,17 @@
 from dataclasses import dataclass, field
-from .book import Book
-
-
 
 @dataclass
 class Reservation:
     reservation_id: int
-    book_name : str
+    book_name: str
     user_id: int
     status: str = field(default="ACTIVE")
-
 
     def cancel_reservation(self):
         if self.status == "ACTIVE":
             self.status = "CANCELED"
         else:
-            raise ValueError(
-                f"Cannot cancel a reservation that is {self.status}."
-            )
+            raise ValueError(f"Cannot cancel a reservation that is {self.status}.")
 
     def check_reservation_status(self) -> str:
         return self.status

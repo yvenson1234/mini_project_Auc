@@ -1,8 +1,7 @@
 from dataclasses import dataclass, field
 from enum import Enum
 
-
-class Category(Enum) :
+class Category(Enum):
     EXACT_SCIENCE = "EXACT_SCIENCES"
     LIFE_SCIENCES = "LIFE_SCIENCES"
     HUMANITIES = "HUMANITIES"   
@@ -16,30 +15,25 @@ class Category(Enum) :
     MEDICINE_AND_HEALTH = "MEDICINE_AND_HEALTH"
     ENVIRONMENTAL_SCIENCES = "ENVIRONMENTAL_SCIENCES"
 
-
-
 class BookStatus(Enum):
     AVAILABLE = "AVAILABLE"
     RESERVED = "RESERVED"
-   
-
-
 
 @dataclass
 class Book:
-    id : int
-    title : str
-    author : str
-    category : Category
-    status :  str = field(default="AVAILABLE")
+    id: int
+    title: str
+    author: str
+    category: Category
+    status: str = field(default="AVAILABLE")
 
     def __post_init__(self):
-        if  not self.title.strip():
-            raise ValueError("Book title connot be empty !!")
+        if not self.title.strip():
+            raise ValueError("Book title cannot be empty !!")
         if not self.author.strip():
-            raise ValueError("Book's author connot be empty!!")
-        self.title=self.title.strip()
-        self.author=self.author.strip()
+            raise ValueError("Book's author cannot be empty!!")
+        self.title = self.title.strip()
+        self.author = self.author.strip()
     
     def is_avalaible(self) -> bool:
         return self.status == "AVAILABLE"
@@ -48,15 +42,10 @@ class Book:
         if self.is_avalaible():
             self.status = "RESERVED"
         else:
-            raise ValueError(
-                f"Cannot reserve a book who is {self.status}"
-            )
-
+            raise ValueError(f"Cannot reserve a book who is {self.status}")
 
     def return_book(self):
         if self.status == "RESERVED":   
             self.status = "AVAILABLE"
         else:
-            raise ValueError(
-                f"Cannot return a book who is {self.status}"
-            )
+            raise ValueError(f"Cannot return a book who is {self.status}")

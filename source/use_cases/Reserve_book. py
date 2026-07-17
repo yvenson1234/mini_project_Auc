@@ -1,29 +1,29 @@
 from entities.reservation import Reservation
-from interfaces.book_repository import BookRepository
-
-
-
 
 class ReserveBookUseCase:
-
     def __init__(self, book_repository, reservation_repository):
         self.book_repository = book_repository
         self.reservation_repository = reservation_repository
 
     def execute(self, reservation: Reservation):
-
-        book = self.book_repository.get_by_id(reservation.book.id)
-
-        if book is None:
+        
+        book = self.book_repository.search_by_title(reservation.book_name)
+        
+       
+        if not book or len(book) == 0:
             raise ValueError("Book not found.")
+        
+        target_book = book[0]
 
-        if not book.is_available():
+        
+        if not target_book.is_avalaible():
             raise ValueError("Book is not available.")
 
-        book.reserve()
+        
+        target_book.reserve()
 
-        self.book_repository.update(book)
-
+        
+        self.book_repository.update(target_book)
         self.reservation_repository.add(reservation)
 
         return reservation

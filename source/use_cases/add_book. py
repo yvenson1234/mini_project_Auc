@@ -1,8 +1,6 @@
 from entities.book import Book
-from interfaces.book_repository import BookRepository
 
 class AddBookUseCase:
-
     def __init__(self, book_repository):
         self.book_repository = book_repository
 
@@ -11,5 +9,4 @@ class AddBookUseCase:
             raise ValueError("Book already exists.")
 
         self.book_repository.add(book)
-
         return book
